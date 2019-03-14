@@ -4,6 +4,17 @@ const App = (props) => {
   const store = props.store
   const anecdotes = props.store.getState()
 
+  const addAnecdote = (event) => {
+    event.preventDefault()
+    const content = event.target.anecdote.value
+    store.dispatch({
+      type: 'ADD',
+      data: { content }
+    })
+
+    event.target.anecdote.value = ''
+  }
+
   const vote = (id) => {
     console.log('vote', id)
     store.dispatch({
@@ -27,8 +38,8 @@ const App = (props) => {
         </div>
       )}
       <h2>create new</h2>
-      <form>
-        <div><input /></div>
+      <form onSubmit={addAnecdote}>
+        <div><input name="anecdote" type="text" /></div>
         <button>create</button>
       </form>
     </div>
