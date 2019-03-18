@@ -8,10 +8,11 @@ const App = (props) => {
   return (
     <div>
       <h2>Anecdotes</h2>
-      <Filter store={props.store} />
-      { props.store.getState().notification.showNotification && <Notification store={props.store} /> }
-      <AnecdoteList store={props.store} />
-      <AnecdoteForm store={props.store} />
+      <Filter />
+      {// props.store.getState().notification.showNotification && <Notification store={props.store} /> 
+      }
+      <AnecdoteList />
+      <AnecdoteForm />
     </div>
   )
 }
