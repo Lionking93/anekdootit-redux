@@ -3,7 +3,7 @@ const initialState = {
   showNotification: false
 }
 
-export const showNotification = (notification) => {
+const showNotification = (notification) => {
   return {
     type: 'SHOW',
     showNotification: true,
@@ -11,10 +11,20 @@ export const showNotification = (notification) => {
   }
 }
 
-export const hideNotification = (id) => {
+const hideNotification = () => {
   return {
     type: 'HIDE',
     showNotification: false
+  }
+}
+
+export const setNotification = (notification, timeout) => {
+  return dispatch => {
+    dispatch(showNotification(notification))
+    
+    setTimeout(() => {
+      dispatch(hideNotification())
+    }, timeout)
   }
 }
 
