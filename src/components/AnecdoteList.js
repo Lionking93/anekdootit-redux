@@ -6,11 +6,10 @@ import { showNotification, hideNotification } from '../reducers/notificationRedu
 const AnecdoteList = (props) => {
   const anecdotes = props.anecdotes
 
-  const vote = (id) => {
-    console.log('vote', id)
-    props.voteAnecdote(id)
+  const vote = anecdote => {
+    console.log('vote', anecdote.id)
+    props.voteAnecdote(anecdote.id)
     
-    const anecdote = anecdotes.find(a => a.id === id)
     console.log(anecdote)
     props.showNotification(`You voted '${anecdote.content}'`)
     setTimeout(() => {
@@ -27,7 +26,7 @@ const AnecdoteList = (props) => {
             </div>
             <div>
               has {anecdote.votes}
-              <button onClick={() => vote(anecdote.id)}>vote</button>
+              <button onClick={() => vote(anecdote)}>vote</button>
             </div>
           </div>
       )}

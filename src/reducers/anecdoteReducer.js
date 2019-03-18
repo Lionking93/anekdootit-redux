@@ -13,9 +13,12 @@ export const addAnecdote = content => {
 }
 
 export const voteAnecdote = (id) => {
-  return {
-    type: 'VOTE',
-    data: { id }
+  return async dispatch => {
+    const data = await anecdotes.voteAnecdote(id)
+    dispatch({
+      type: 'VOTE',
+      data
+    })
   }
 }
 
@@ -38,7 +41,7 @@ const reducer = (state = initialState, action) => {
       const anecdote = state.find(a => a.id === action.data.id)
       return state
         .map(a => 
-          a.id !== action.data.id ? a : { ...anecdote, votes: anecdote.votes + 1 })
+          a.id !== action.data.id ? a : action.data)
         .sort((a, b) => a.votes < b.votes)
     case 'ADD':
       const newAnecdote = action.data
